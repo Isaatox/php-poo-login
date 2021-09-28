@@ -16,7 +16,10 @@ class UserManager {
         //Préparation de la requête d'insertion
         //Assignation des valeurs pour le nom, la force ...
         //Exécution de la requête
-
+        $query = $this->_db->prepare('INSERT INTO users (`email`, `password`) VALUES (:email, :`password`);');
+        $query->bindValue(':email', $user->getEmail());
+        $query->bindValue(':password', $user->getPassword());
+        return $query->execute();
     }
     
     

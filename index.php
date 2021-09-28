@@ -29,8 +29,11 @@
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
     </form>
-    <?php print("<br/>email = '".$_POST['email']."'"); ?>
-    <?php print("<br/>password = '".$_POST['password']."'"); ?>
     </main>
 </body>
 </html>
+
+<?php
+include('header.php');
+
+?>
