@@ -1,6 +1,16 @@
 <?php
+function chargerClasse(string $classe)
+{
+ include $classe . '.php';   
+}
 
+spl_autoload_register('chargerClasse');
+
+
+
+include('conf.php'); 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +25,30 @@
 <table class="table">
     <thead>
         <th>ID</th>
-        <th>Libellé</th>
-        <th>Actions</th>
+        <th>email</th>
+        <th>role</th>
     </thead>
+    <tbody>
+    <?php
+    try {
+        $db = new PDO($dsn, $dbname, $password);
+        $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); //Si toutes les colonnes sont fausse
+    
+        
+        $userManager = new UserManager($db);
+        $users = $userManager->getList();
+    
+        foreach ($users as $user) {
+            print('<td>'.$user->getId().'</td>');
+            print('<td>'.$user->getEmail().'</td>');
+            print('<td>'.$user->getRole().'</td>');
+        }
+    }
+    catch (PDOException $e) {
+        print('<br/>Erreur de connexion ' . $e->getMessage());
+    }
+    ?>
+    </tbody>
 </table>
 
        <a href="add.php" class="btn btn-primary">Ajouter un utilisateur</a>
