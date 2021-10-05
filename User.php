@@ -8,17 +8,16 @@ class User {
     private $_role;
 
 
-    public function __construct(array $ligne)
+    public function __construct(array $ligne=null)
     {
         $this->hydrate($ligne);
-
     }
 
 
-    public function hydrate(array $ligne)
+    public function hydrate(?array $ligne)
     {
         foreach ($ligne as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -61,7 +60,7 @@ class User {
      */ 
     public function setPassword($_password)
     {
-        $this->_password = password_hash($password, PASSWORD_BCRYPT);
+        $this->_password = password_hash($_password, PASSWORD_BCRYPT);
 
         return $this;
     }

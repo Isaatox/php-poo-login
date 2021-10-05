@@ -13,18 +13,17 @@
 
 
 -- Listage de la structure de la base pour feedback
-DROP DATABASE IF EXISTS `feedback`;
 CREATE DATABASE IF NOT EXISTS `feedback` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `feedback`;
 
 -- Listage de la structure de la table feedback. users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 

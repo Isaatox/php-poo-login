@@ -30,10 +30,13 @@ include('header.php');
         $users = $userManager->getList();
     
         foreach ($users as $user) {?>
+        <tr>
             <td><?= $user->getId() ?></td>
             <td><?= $user->getEmail() ?></td>
             <td><a href="details.php?id=<?= $user->getId() ?>">Voir</a> <a href="edit.php?id=<?= $user->getId() ?>">Modifier</a> <a href="remove.php?id=<?= $user->getId() ?>">Supprimer</a></td>
+        </tr>
 <?php
+
         }
     }
     catch (PDOException $e) {
