@@ -25,15 +25,14 @@ class UserManager
     {
         $result = false;
         try {
-            $query = $this->_db->prepare('INSERT INTO users (`email`, `password`) VALUES (:email, :`password`);');
-            print_r($query);
+            $query = $this->_db->prepare('INSERT INTO users (`email`, `password`) VALUES (:email, :passwd);');
             $query->bindValue(':email', $user->getEmail());
-            $query->bindValue(':password', $user->getPassword());
+            $query->bindValue(':passwd', $user->getPassword());
             $result = $query->execute();
         } catch (Exception $e) {
             print("UNe erreur est intervenue : '".$e->getMessage()."'");
         }
-        return result;
+        return $result;
     }
 
     public function delete(User $user): bool
@@ -53,6 +52,16 @@ class UserManager
         }
         return $listeUser;
     }
+
+    public function getOne(int $id)
+    {
+        $sth = $this->_db->prepare('SELECT * FROM users WHERE id = ?');
+        $sth-> execute(array($id));
+        $ligne = $sth->fetch();
+        $user = new User($ligne);  
+        return $user; 
+    }
+
 
     public function update(Personnage $perso): bool
     {
